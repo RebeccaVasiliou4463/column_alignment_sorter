@@ -44,3 +44,10 @@ silently coercing to `nan`, which would poison any comparison.
 
 Case folding (`ignore_case=True`) uses `str.lower` on the key text; it has no
 effect when `numeric=True` is also set.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
